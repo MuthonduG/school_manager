@@ -73,27 +73,24 @@
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fas fa-book-reader"></i>
-                        <span> Subjects</span>
+                        <span> Events</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="subjects.html">Subject List</a></li>
-                        <li><a href="add-subject.html">Subject Add</a></li>
-                        <li><a href="edit-subject.html">Subject Edit</a></li>
+                        <li><a href="{{ route('event/list/page') }}" class="{{set_active(['event/list/page'])}}">List Events</a></li>
+                        <li><a href="{{ route('event/add/page') }}" class="{{set_active(['event/add/page'])}}">Add Event</a></li>
+                        <li><a href="{{ route('event/edit/page') }}" class="{{set_active(['event/edit/page'])}}">Edit Event</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fas fa-clipboard"></i>
-                        <span> Invoices</span>
+                        <span> Clubs</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="invoices.html">Invoices List</a></li>
-                        <li><a href="invoice-grid.html">Invoices Grid</a></li>
-                        <li><a href="add-invoice.html">Add Invoices</a></li>
-                        <li><a href="edit-invoice.html">Edit Invoices</a></li>
-                        <li><a href="view-invoice.html">Invoices Details</a></li>
-                        <li><a href="invoices-settings.html">Invoices Settings</a></li>
+                        <li><a href="{{ route('club/list/page') }}" class="{{set_active(['club/list/page'])}}">Club List</a></li>
+                        <li><a href="{{ route('club/add/page') }}" class="{{set_active(['club/add/page'])}}">Club Add</a></li>
+                        {{-- <li><a href="{{ route('club/edit/page') }}" class="{{set_active(['club/edit/page'])}}">Club Edit</a></li> --}}
                     </ul>
                 </li>
                 <li class="menu-title">

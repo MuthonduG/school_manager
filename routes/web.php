@@ -12,6 +12,8 @@ use App\Http\Controllers\Setting;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ClubController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,3 +117,33 @@ Route::controller(DepartmentController::class)->group(function () {
     Route::get('department/add/page', 'indexDepartment')->middleware('auth')->name('department/add/page'); // page add department
     Route::get('department/edit/page', 'editDepartment')->middleware('auth')->name('department/edit/page'); // page add department
 });
+
+// ----------------------- club -----------------------------------//
+Route::controller(ClubController::class)->group(function () {
+    Route::get('club/list/page', 'clubList')->middleware('auth')->name('club/list/page');
+    Route::get('club/add/page', 'indexClub')->middleware('auth')->name('club/add/page');
+    Route::post('club/store', 'store')->middleware('auth')->name('club.store');
+
+    Route::get('club/edit/{id}', 'editClubForm')->middleware('auth')->name('club/edit/page'); 
+    Route::put('club/update/{id}', 'updateClub')->middleware('auth')->name('club/update');
+
+    // 🔧 Add this route for joining a club
+    Route::post('club/join/{id}', 'join')->middleware('auth')->name('club.join');
+});
+
+
+// ----------------------- events -----------------------------//
+Route::controller(EventController::class)->group(function () {
+    Route::get('event/list/page', 'eventList')->middleware('auth')->name('event/list/page'); // List events
+    Route::get('event/add/page', 'indexEvent')->middleware('auth')->name('event/add/page');   // Show create form
+    Route::get('event/edit/page', 'editEvent')->middleware('auth')->name('event/edit/page');  // Edit event page
+    Route::get('event/{id}/edit', 'editEvent')->middleware('auth')->name('event.edit');
+
+    Route::post('event/store', 'store')->middleware('auth')->name('event.store');             // Store event
+    Route::get('event/{id}', 'showEvent')->middleware('auth')->name('event.show');      // Show event + RSVP form
+    Route::post('event/rsvp', 'rsvp')->middleware('auth')->name('event.rsvp');                // RSVP submission
+
+});
+
+// ----------------------- 500 -----------------------------//
+Route::view('error/500', 'errors.500')->name('error.500');
