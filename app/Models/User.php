@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Club;
+use App\Models\Event;
 
 class User extends Authenticatable
 {
@@ -39,5 +40,10 @@ class User extends Authenticatable
     public function clubs()
     {
         return $this->belongsToMany(Club::class, 'club_user');
+    }
+
+    public function rsvps()
+    {
+        return $this->belongsToMany(Event::class, 'event_rsvps')->withTimestamps();
     }
 }

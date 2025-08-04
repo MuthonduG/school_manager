@@ -145,16 +145,17 @@ Route::controller(ClubController::class)->group(function () {
 
 // ----------------------- events -----------------------------//
 Route::controller(EventController::class)->group(function () {
-    Route::get('event/list/page', 'eventList')->middleware('auth')->name('event/list/page'); // List events
-    Route::get('event/add/page', 'indexEvent')->middleware('auth')->name('event/add/page');   // Show create form
-    Route::get('event/edit/page', 'editEvent')->middleware('auth')->name('event/edit/page');  // Edit event page
+    Route::get('event/list/page', 'eventList')->middleware('auth')->name('event/list/page');
+    Route::get('event/add/page', 'indexEvent')->middleware('auth')->name('event/add/page');
+    Route::get('event/edit/page', 'editEvent')->middleware('auth')->name('event/edit/page');
     Route::get('event/{id}/edit', 'editEvent')->middleware('auth')->name('event.edit');
-
-    Route::post('event/store', 'store')->middleware('auth')->name('event.store');             // Store event
-    Route::get('event/{id}', 'showEvent')->middleware('auth')->name('event.show');      // Show event + RSVP form
-    Route::post('event/rsvp', 'rsvp')->middleware('auth')->name('event.rsvp');                // RSVP submission
-
+    Route::post('event/store', 'store')->middleware('auth')->name('event.store');
+    
+    // RSVP POST route must come before event/{id}
+    Route::post('event/rsvp/{id}', 'rsvp')->middleware('auth')->name('event.rsvp');
+    Route::get('event/{id}', 'showEvent')->middleware('auth')->name('event.show');
 });
+
 
 // ----------------------- 500 -----------------------------//
 Route::view('error/500', 'errors.500')->name('error.500');

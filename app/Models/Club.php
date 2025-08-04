@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Event;
 
 class Club extends Model
 {
@@ -21,5 +22,10 @@ class Club extends Model
     public function members()
     {
         return $this->belongsToMany(User::class, 'club_user');
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
     }
 }
