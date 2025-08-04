@@ -14,6 +14,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\EventController;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +28,22 @@ use App\Http\Controllers\EventController;
 */
 
 /** for side bar menu active */
-function set_active( $route ) {
-    if( is_array( $route ) ){
-        return in_array(Request::path(), $route) ? 'active' : '';
+// function set_active( $route ) {
+//     if( is_array( $route ) ){
+//         return in_array(Request::path(), $route) ? 'active' : '';
+//     }
+//     return Request::path() == $route ? 'active' : '';
+// }
+
+if (!function_exists('set_active')) {
+    function set_active($route) {
+        if (is_array($route)) {
+            return in_array(Request::path(), $route) ? 'active' : '';
+        }
+        return Request::path() == $route ? 'active' : '';
     }
-    return Request::path() == $route ? 'active' : '';
 }
+
 
 Route::get('/', function () {
     return view('auth.login');

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\DB;
+use App\Mail\ClubJoinedMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Club;
 
 class ClubController extends Controller
@@ -99,6 +101,7 @@ class ClubController extends Controller
         }
 
         $club->members()->attach($user->id);
+        Mail::to($user->email)->send(new ClubJoinedMail($club));
         Toastr::success('You have joined the club successfully!', 'Success');
 
         return redirect()->route('club/list/page')->with('success', 'You have joined the club successfully!');
