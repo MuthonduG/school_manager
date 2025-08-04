@@ -128,7 +128,7 @@ class EventController extends Controller
 
         // Create RSVP
         $event->rsvps()->create(['user_id' => $user->id]);
-        Mail::to($user->email)->send(new EventRSVPMail($event));
+        Mail::to($user->email)->send(new EventRSVPMail($user, $event));
         Toastr::success('RSVP successful!', 'Success');
 
         // Increment count

@@ -2,24 +2,26 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
 
 class EventRSVPMail extends Mailable
 {
-    use Queueable, SerializesModels;
-
+    public $user;
     public $event;
 
-    public function __construct($event)
+    public function __construct($user, $event)
     {
+        $this->user = $user;
         $this->event = $event;
     }
 
     public function build()
     {
-        return $this->subject('RSVP Confirmation')
-                    ->view('emails.event-rsvp');
+        return $this->view('emails.event-rsvp')
+                    ->with([
+                        'user' => $this->user,
+                        'event' => $this->event,
+                    ]);
     }
 }
+
